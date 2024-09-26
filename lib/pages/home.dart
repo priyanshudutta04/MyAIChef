@@ -5,13 +5,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:my_ai_chef/widgets/charger_card.dart';
 import 'package:my_ai_chef/widgets/pulsating_gradient.dart';
+import 'package:my_ai_chef/widgets/sparkling_animation.dart';
 import 'package:shimmer/shimmer.dart';
-
-
 import 'package:velocity_x/velocity_x.dart';
-
-
-
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -22,6 +18,33 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+  int selectedChipIndex=0;
+  final Map<String, String> filterChips = {
+    "Recommended": "assets/images/recom.png",
+    "Breakfast": "assets/images/breakfast.png",
+    "Lunch": "assets/images/lunch.png",
+    "Appetizer": "assets/images/apetizer.png",
+    "Dinner": "assets/images/dinner.png",
+  };
+
+  final Map<String, List<String>> recomFoods = {
+    "Chicken Biriyani": [
+      "229kcal",
+      "assets/images/biriyani.png"
+    ],
+    "Fried Rice": [
+      "229kcal",
+      "assets/images/biriyani.png"
+    ],
+    "Tikka Masala": [
+      "229kcal",
+      "assets/images/biriyani.png"
+    ],
+    "Noodles": [
+      "229kcal",
+      "assets/images/biriyani.png"
+    ],
+  };
 
   @override
   void initState() {
@@ -203,9 +226,134 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ],
-                      ),
-                    
+                      ),     
                   ),
+
+                  SizedBox(height: 10,),
+
+                  Center(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: List<Widget>.generate(filterChips.length, (int index) {
+                          return Padding(
+                            padding: EdgeInsets.symmetric(horizontal:10),
+                            child: FilterChip(
+                              backgroundColor: context.theme.highlightColor,
+                              showCheckmark: false,
+                              selectedColor: context.theme.cardColor,
+                              avatar: Image.asset(
+                                width: 35,
+                                height: 35,
+                                filterChips.values.elementAt(index),
+                                fit: BoxFit.cover,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),        
+                              ),
+                              side: BorderSide.none,
+                              label: Text(
+                                filterChips.keys.elementAt(index),
+                                style: TextStyle(
+                                  color: selectedChipIndex== index?context.theme.highlightColor:Colors.black
+                                ),
+                              ),
+                              selected: selectedChipIndex == index,
+                              onSelected: (bool selected) {
+                                setState(() {
+                                  selectedChipIndex =  index;
+                                });
+                              },
+                            ),
+                          );
+                        }),
+                      ),
+                    )
+                  ),
+
+                
+                  
+                   Container(
+                    height: 400,
+                     child: GridView.builder(             
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, 
+                          crossAxisSpacing: 15.0, 
+                          mainAxisSpacing: 20.0,  
+                          childAspectRatio: 1/1.4, 
+                        ),
+                        itemCount: recomFoods.length,
+                        itemBuilder: (context, index) {
+                          String key = recomFoods.keys.elementAt(index);
+                          List<String>? values = recomFoods[key];
+                          return Container(
+                            decoration: BoxDecoration(
+                               color: context.theme.highlightColor,
+                               borderRadius: BorderRadius.circular(15)
+                            ),
+                            
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                              Center(
+                                  child: Image.asset(
+                                  width: 120,
+                                  height: 120,
+                                  values![1],
+                                  fit: BoxFit.cover,
+                                ),
+                              ),                
+                               Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                                  child: Text(
+                                      key,
+                                      style: TextStyle( fontSize: 16),
+                                    ),
+                                ),                              
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 10),
+                                child: Text(
+                                   values![0],
+                                    style: TextStyle( fontSize: 14,color: context.theme.splashColor),
+                                ),
+                              ),
+                              SizedBox(height: 10,),
+                              
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    GestureDetector(
+                                      child: Container(
+                                        width: 80,
+                                        height:25,
+                                        decoration: BoxDecoration(
+                                          color: context.theme.cardColor,
+                                          borderRadius: BorderRadius.circular(20)
+                                        ),
+                                        child: Center(child: Text("View Recipe",
+                                          style: TextStyle(color: context.theme.highlightColor),
+                                        )),
+                                      ),
+                                    ),
+                                    Text(
+                                      "15 mins",
+                                      style: TextStyle( fontSize: 14,color: context.theme.splashColor),
+                                    ),
+                                  ],
+                                ),
+                              
+                            ],
+                          ),
+                          );
+                        },
+                        padding: const EdgeInsets.all(10.0),
+                        physics: AlwaysScrollableScrollPhysics(),
+                     ),
+                   ),
+                 
+                
+
                 
 
               ],
@@ -218,162 +366,5 @@ class _HomePageState extends State<HomePage> {
 }
 
 
-class SparklingAnimation extends StatefulWidget {
-  final Widget child;
-
-  const SparklingAnimation({required this.child});
-
-  @override
-  _SparklingAnimationState createState() => _SparklingAnimationState();
-}
-
-class _SparklingAnimationState extends State<SparklingAnimation> with SingleTickerProviderStateMixin {
-  final Random random = Random();
-  final List<List<Offset>> _sparkleTrails = []; // Stores a list of previous positions for each star
-  final List<double> _sparkleOpacities = [];
-  final List<Offset> _velocity = [];
-  late AnimationController _controller;
-
-  final double maxSpeed = 0.3;  // Slow down the movement
-  final int trailLength = 10; // Number of trail positions to store for each star
-
-  @override
-  void initState() {
-    super.initState();
-
-    // Initialize stars with trails
-    for (int i = 0; i < 10; i++) {
-      // Initialize each star's trail with its starting position
-      List<Offset> initialTrail = List.generate(
-        trailLength,
-        (_) => Offset(random.nextDouble() * 200, random.nextDouble() * 200),
-      );
-
-      _sparkleTrails.add(initialTrail);
-      _sparkleOpacities.add(random.nextDouble() * 0.5 + 0.5);
-
-      _velocity.add(Offset(
-        random.nextDouble() * maxSpeed * 2 - maxSpeed,
-        random.nextDouble() * maxSpeed * 2 - maxSpeed,
-      ));
-    }
-
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 16),
-      vsync: this,
-    )..repeat();
-
-    _controller.addListener(() {
-      for (int i = 0; i < _sparkleTrails.length; i++) {
-        // Update the trail by removing the oldest position and adding the new position
-        List<Offset> trail = _sparkleTrails[i];
-
-        Offset newPosition = trail.last + _velocity[i];
-
-        // Ensure the new position stays within bounds
-        if (newPosition.dx < 0 || newPosition.dx > 200) {
-          _velocity[i] = Offset(-_velocity[i].dx, _velocity[i].dy);
-        }
-        if (newPosition.dy < 0 || newPosition.dy > 200) {
-          _velocity[i] = Offset(_velocity[i].dx, -_velocity[i].dy);
-        }
-
-        // Add new position at the end and remove the oldest position
-        trail.add(newPosition);
-        if (trail.length > trailLength) {
-          trail.removeAt(0);
-        }
-
-        _sparkleTrails[i] = trail;
-      }
-      setState(() {});
-    });
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipRect(  // This restricts the drawing area of CustomPaint
-      child: Stack(
-        children: [
-          widget.child,
-          Positioned.fill(
-            child: CustomPaint(
-              painter: SparklingPainter(
-                sparkleTrails: _sparkleTrails,
-                sparkleOpacities: _sparkleOpacities,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class SparklingPainter extends CustomPainter {
-  final List<List<Offset>> sparkleTrails;
-  final List<double> sparkleOpacities;
-
-  SparklingPainter({
-    required this.sparkleTrails,
-    required this.sparkleOpacities,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()
-      ..color = Colors.white
-      ..style = PaintingStyle.fill;
-
-    for (int i = 0; i < sparkleTrails.length; i++) {
-      final List<Offset> trail = sparkleTrails[i];
-      final double opacity = sparkleOpacities[i];
-
-      // Draw the trail, fading out with each previous position
-      for (int j = 0; j < trail.length - 1; j++) {
-        final Offset start = trail[j];
-        final Offset end = trail[j + 1];
-
-        // Create a fading effect by decreasing opacity for older positions
-        paint.color = Colors.white.withOpacity(opacity * (j + 1) / trail.length);
-
-        // Draw a line segment for the trail
-        canvas.drawLine(start, end, paint);
-      }
-
-      // Draw the current star (last position in the trail)
-      paint.color = Colors.white.withOpacity(opacity);
-      drawStar(canvas, trail.last.dx, trail.last.dy, paint);
-    }
-  }
-
-  void drawStar(Canvas canvas, double x, double y, Paint paint) {
-    final path = Path();
-    const double radius = 5.0;
-    path.moveTo(x, y - radius);
-    for (int i = 1; i <= 5; i++) {
-      path.lineTo(
-        x + radius * cos((i * 2 * pi) / 5),
-        y - radius * sin((i * 2 * pi) / 5),
-      );
-      path.lineTo(
-        x + (radius / 2) * cos(((i * 2 + 1) * pi) / 5),
-        y - (radius / 2) * sin(((i * 2 + 1) * pi) / 5));
-    }
-    path.close();
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
-  }
-}
 
 
