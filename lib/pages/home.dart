@@ -1,13 +1,11 @@
-import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:my_ai_chef/widgets/charger_card.dart';
-import 'package:my_ai_chef/widgets/pulsating_gradient.dart';
+import 'package:my_ai_chef/utils/bottom_pages_list.dart';
+import 'package:my_ai_chef/widgets/bottom_nav.dart';
 import 'package:my_ai_chef/widgets/sparkling_animation.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -114,6 +112,7 @@ class _HomePageState extends State<HomePage> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
 
                 TextField(
@@ -270,96 +269,106 @@ class _HomePageState extends State<HomePage> {
                       ),
                     )
                   ),
+              
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text("Based on the type of food you like",
+                    style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,color: context.theme.splashColor),),
+                  ),
 
-                
                   
-                   Container(
-                    height: 400,
-                     child: GridView.builder(             
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2, 
-                          crossAxisSpacing: 15.0, 
-                          mainAxisSpacing: 20.0,  
-                          childAspectRatio: 1/1.4, 
-                        ),
-                        itemCount: recomFoods.length,
-                        itemBuilder: (context, index) {
-                          String key = recomFoods.keys.elementAt(index);
-                          List<String>? values = recomFoods[key];
-                          return Container(
-                            decoration: BoxDecoration(
-                               color: context.theme.highlightColor,
-                               borderRadius: BorderRadius.circular(15)
+                    Padding(
+                       padding: const EdgeInsets.only(bottom: 5),                  
+                         child: GridView.builder( 
+                          shrinkWrap: true,            
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2, 
+                              crossAxisSpacing: 15.0, 
+                              mainAxisSpacing: 20.0,  
+                              childAspectRatio: 1/1.4, 
                             ),
-                            
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                              Center(
-                                  child: Image.asset(
-                                  width: 120,
-                                  height: 120,
-                                  values![1],
-                                  fit: BoxFit.cover,
+                            itemCount: recomFoods.length,
+                            itemBuilder: (context, index) {
+                              String key = recomFoods.keys.elementAt(index);
+                              List<String>? values = recomFoods[key];
+                              return Container(
+                                decoration: BoxDecoration(
+                                   color: context.theme.highlightColor,
+                                   borderRadius: BorderRadius.circular(15)
                                 ),
-                              ),                
-                               Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                                  child: Text(
-                                      key,
-                                      style: TextStyle( fontSize: 16),
-                                    ),
-                                ),                              
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 10),
-                                child: Text(
-                                   values![0],
-                                    style: TextStyle( fontSize: 14,color: context.theme.splashColor),
-                                ),
-                              ),
-                              SizedBox(height: 10,),
-                              
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    GestureDetector(
-                                      child: Container(
-                                        width: 80,
-                                        height:25,
-                                        decoration: BoxDecoration(
-                                          color: context.theme.cardColor,
-                                          borderRadius: BorderRadius.circular(20)
+                                  Center(
+                                      child: Image.asset(
+                                      width: 120,
+                                      height: 120,
+                                      values![1],
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),                
+                                   Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                                      child: Text(
+                                          key,
+                                          style: TextStyle( fontSize: 16),
                                         ),
-                                        child: Center(child: Text("View Recipe",
-                                          style: TextStyle(color: context.theme.highlightColor),
-                                        )),
-                                      ),
+                                    ),                              
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                                    child: Text(
+                                       values![0],
+                                        style: TextStyle( fontSize: 14,color: context.theme.splashColor),
                                     ),
-                                    Text(
-                                      "15 mins",
-                                      style: TextStyle( fontSize: 14,color: context.theme.splashColor),
+                                  ),
+                                  SizedBox(height: 10,),
+                                  
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        GestureDetector(
+                                          child: Container(
+                                            padding: EdgeInsets.all(2),
+                                            width: 85,
+                                            height:25,
+                                            decoration: BoxDecoration(
+                                              color: context.theme.cardColor,
+                                              borderRadius: BorderRadius.circular(20)
+                                            ),
+                                            child: Center(child: Text("View Recipe",
+                                              style: TextStyle(color: context.theme.highlightColor),
+                                            )),
+                                          ),
+                                        ),
+                                        Text(
+                                          "15 mins",
+                                          style: TextStyle( fontSize: 14,color: context.theme.splashColor),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                              
-                            ],
-                          ),
-                          );
-                        },
-                        padding: const EdgeInsets.all(10.0),
-                        physics: AlwaysScrollableScrollPhysics(),
+                                  
+                                ],
+                              ),
+                              );
+                            },
+                            padding: const EdgeInsets.all(10.0),
+                            physics: const BouncingScrollPhysics(),
+                         ),
+                       
                      ),
-                   ),
-                 
-                
-
-                
+                   
+                            
 
               ],
             ),
           ),
         )
+      ),
+      bottomNavigationBar: BottomNav(
+          pages: pages,
+          selectedInd: 0,
       ),
     );
   }

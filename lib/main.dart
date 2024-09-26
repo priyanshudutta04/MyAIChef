@@ -2,12 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_ai_chef/pages/blogs.dart';
 import 'package:my_ai_chef/pages/check_availability.dart';
 import 'package:my_ai_chef/pages/choose_charger.dart';
 import 'package:my_ai_chef/pages/get_started.dart';
 import 'package:my_ai_chef/pages/home.dart';
 import 'package:my_ai_chef/pages/payment.dart';
 import 'package:my_ai_chef/pages/payment_done.dart';
+import 'package:my_ai_chef/pages/profile.dart';
+import 'package:my_ai_chef/pages/recipes.dart';
 import 'package:my_ai_chef/pages/station_details.dart';
 import 'package:my_ai_chef/utils/routes.dart';
 import 'package:my_ai_chef/utils/themes.dart';
@@ -70,6 +73,9 @@ class _MyAppState extends State<MyApp> {
         Myroutes.availabilityRoute: (context) => CheckAvailability(),
         Myroutes.paymentRoute: (context) => PaymentPage(),
         Myroutes.paymentDoneRoute: (context) => PaymentDone(),
+        Myroutes.blogsRoute: (context) => BlogsPage(),
+        Myroutes.recipesRoute: (context) => RecipesPage(),
+        Myroutes.profileRoute: (context) => ProfilePage(),
       },
     );   
   }
