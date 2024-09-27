@@ -1,4 +1,4 @@
-package com.example.power_ev
+package com.example.myAiChef
 
 import io.flutter.embedding.android.FlutterActivity
 

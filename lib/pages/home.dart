@@ -329,6 +329,9 @@ class _HomePageState extends State<HomePage> {
                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: [
                                         GestureDetector(
+                                          onTap: () {
+                                            Navigator.pushNamed(context, '/recipeDetails');
+                                          },
                                           child: Container(
                                             padding: EdgeInsets.all(2),
                                             width: 85,

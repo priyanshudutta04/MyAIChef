@@ -10,6 +10,7 @@ import 'package:my_ai_chef/pages/home.dart';
 import 'package:my_ai_chef/pages/payment.dart';
 import 'package:my_ai_chef/pages/payment_done.dart';
 import 'package:my_ai_chef/pages/profile.dart';
+import 'package:my_ai_chef/pages/recipe_details.dart';
 import 'package:my_ai_chef/pages/recipes.dart';
 import 'package:my_ai_chef/pages/station_details.dart';
 import 'package:my_ai_chef/utils/routes.dart';
@@ -76,6 +77,7 @@ class _MyAppState extends State<MyApp> {
         Myroutes.blogsRoute: (context) => BlogsPage(),
         Myroutes.recipesRoute: (context) => RecipesPage(),
         Myroutes.profileRoute: (context) => ProfilePage(),
+        Myroutes.recipeDetailsRoute: (context) => RecipeDetails(),
       },
     );   
   }
