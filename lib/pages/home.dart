@@ -44,6 +44,84 @@ class _HomePageState extends State<HomePage> {
     ],
   };
 
+  final Map<String, List<String>> breakfastFoods = {
+    "Poha": [
+      "229kcal",
+      "assets/images/biriyani.png"
+    ],
+    "Fried Rice": [
+      "229kcal",
+      "assets/images/biriyani.png"
+    ],
+    "Tikka Masala": [
+      "229kcal",
+      "assets/images/biriyani.png"
+    ],
+    "Noodles": [
+      "229kcal",
+      "assets/images/biriyani.png"
+    ],
+  };
+
+  final Map<String, List<String>> lunchFoods = {
+    "Dosa": [
+      "229kcal",
+      "assets/images/biriyani.png"
+    ],
+    "Fried Rice": [
+      "229kcal",
+      "assets/images/biriyani.png"
+    ],
+    "Tikka Masala": [
+      "229kcal",
+      "assets/images/biriyani.png"
+    ],
+    "Noodles": [
+      "229kcal",
+      "assets/images/biriyani.png"
+    ],
+  };
+
+  final Map<String, List<String>> appetizerFoods = {
+    "Samosa": [
+      "229kcal",
+      "assets/images/biriyani.png"
+    ],
+    "Fried Rice": [
+      "229kcal",
+      "assets/images/biriyani.png"
+    ],
+    "Tikka Masala": [
+      "229kcal",
+      "assets/images/biriyani.png"
+    ],
+    "Noodles": [
+      "229kcal",
+      "assets/images/biriyani.png"
+    ],
+  };
+
+  final Map<String, List<String>> dinnerFoods = {
+    "Butter Chiken": [
+      "229kcal",
+      "assets/images/biriyani.png"
+    ],
+    "Fried Rice": [
+      "229kcal",
+      "assets/images/biriyani.png"
+    ],
+    "Tikka Masala": [
+      "229kcal",
+      "assets/images/biriyani.png"
+    ],
+    "Noodles": [
+      "229kcal",
+      "assets/images/biriyani.png"
+    ],
+  };
+
+
+
   @override
   void initState() {
     super.initState();
@@ -214,13 +292,15 @@ class _HomePageState extends State<HomePage> {
                                   ],
                                 ),
                               ),
+                              Spacer(),
                                         
                               Image.asset(
-                              width: 100,
+                              width: 120,
                               height: 150,
                               "assets/images/woman_chef.png",
                               fit: BoxFit.cover,
                             ),
+                            SizedBox(width: 10,)
                               
                             ],
                           ),
@@ -360,10 +440,7 @@ class _HomePageState extends State<HomePage> {
                             physics: const BouncingScrollPhysics(),
                          ),
                        
-                     ),
-                   
-                            
-
+                     ),                                      
               ],
             ),
           ),
