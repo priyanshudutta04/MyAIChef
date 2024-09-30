@@ -16,7 +16,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  int selectedChipIndex=0;
+  int selectedChipIndex = 0;
+  
   final Map<String, String> filterChips = {
     "Recommended": "assets/images/recom.png",
     "Breakfast": "assets/images/breakfast.png",
@@ -26,107 +27,69 @@ class _HomePageState extends State<HomePage> {
   };
 
   final Map<String, List<String>> recomFoods = {
-    "Chicken Biriyani": [
-      "229kcal",
-      "assets/images/biriyani.png"
-    ],
-    "Fried Rice": [
-      "229kcal",
-      "assets/images/biriyani.png"
-    ],
-    "Tikka Masala": [
-      "229kcal",
-      "assets/images/biriyani.png"
-    ],
-    "Noodles": [
-      "229kcal",
-      "assets/images/biriyani.png"
-    ],
+    "Chicken Biriyani": ["229kcal", "assets/images/biriyani.png"],
+    "Fried Rice": ["229kcal", "assets/images/biriyani.png"],
+    "Tikka Masala": ["229kcal", "assets/images/biriyani.png"],
+    "Noodles": ["229kcal", "assets/images/biriyani.png"],
   };
 
   final Map<String, List<String>> breakfastFoods = {
-    "Poha": [
-      "229kcal",
-      "assets/images/biriyani.png"
-    ],
-    "Fried Rice": [
-      "229kcal",
-      "assets/images/biriyani.png"
-    ],
-    "Tikka Masala": [
-      "229kcal",
-      "assets/images/biriyani.png"
-    ],
-    "Noodles": [
-      "229kcal",
-      "assets/images/biriyani.png"
-    ],
+    "Poha": ["229kcal", "assets/images/biriyani.png"],
+    "Fried Rice": ["229kcal", "assets/images/biriyani.png"],
+    "Tikka Masala": ["229kcal", "assets/images/biriyani.png"],
+    "Noodles": ["229kcal", "assets/images/biriyani.png"],
   };
 
   final Map<String, List<String>> lunchFoods = {
-    "Dosa": [
-      "229kcal",
-      "assets/images/biriyani.png"
-    ],
-    "Fried Rice": [
-      "229kcal",
-      "assets/images/biriyani.png"
-    ],
-    "Tikka Masala": [
-      "229kcal",
-      "assets/images/biriyani.png"
-    ],
-    "Noodles": [
-      "229kcal",
-      "assets/images/biriyani.png"
-    ],
+    "Dosa": ["229kcal", "assets/images/biriyani.png"],
+    "Fried Rice": ["229kcal", "assets/images/biriyani.png"],
+    "Tikka Masala": ["229kcal", "assets/images/biriyani.png"],
+    "Noodles": ["229kcal", "assets/images/biriyani.png"],
   };
 
   final Map<String, List<String>> appetizerFoods = {
-    "Samosa": [
-      "229kcal",
-      "assets/images/biriyani.png"
-    ],
-    "Fried Rice": [
-      "229kcal",
-      "assets/images/biriyani.png"
-    ],
-    "Tikka Masala": [
-      "229kcal",
-      "assets/images/biriyani.png"
-    ],
-    "Noodles": [
-      "229kcal",
-      "assets/images/biriyani.png"
-    ],
+    "Samosa": ["229kcal", "assets/images/biriyani.png"],
+    "Fried Rice": ["229kcal", "assets/images/biriyani.png"],
+    "Tikka Masala": ["229kcal", "assets/images/biriyani.png"],
+    "Noodles": ["229kcal", "assets/images/biriyani.png"],
   };
 
   final Map<String, List<String>> dinnerFoods = {
-    "Butter Chiken": [
-      "229kcal",
-      "assets/images/biriyani.png"
-    ],
-    "Fried Rice": [
-      "229kcal",
-      "assets/images/biriyani.png"
-    ],
-    "Tikka Masala": [
-      "229kcal",
-      "assets/images/biriyani.png"
-    ],
-    "Noodles": [
-      "229kcal",
-      "assets/images/biriyani.png"
-    ],
+    "Butter Chiken": ["229kcal", "assets/images/biriyani.png"],
+    "Fried Rice": ["229kcal", "assets/images/biriyani.png"],
+    "Tikka Masala": ["229kcal", "assets/images/biriyani.png"],
+    "Noodles": ["229kcal", "assets/images/biriyani.png"],
   };
 
-
+  late Map<String, List<String>> currentFoodList;
 
   @override
   void initState() {
     super.initState();
-   
+
+    currentFoodList = lunchFoods;
   }
+
+  void updateFoodList(int index) {
+    switch (index) {
+      case 0:
+        currentFoodList = recomFoods;
+        break;
+      case 1:
+        currentFoodList = breakfastFoods;
+        break;
+      case 2:
+        currentFoodList = lunchFoods;
+        break;
+      case 3:
+        currentFoodList = appetizerFoods;
+        break;
+      case 4:
+        currentFoodList = dinnerFoods;
+        break;
+    }
+  }
+
 
 
   @override
@@ -341,7 +304,9 @@ class _HomePageState extends State<HomePage> {
                               onSelected: (bool selected) {
                                 setState(() {
                                   selectedChipIndex =  index;
+                                  updateFoodList(selectedChipIndex);
                                 });
+
                               },
                             ),
                           );
@@ -367,10 +332,10 @@ class _HomePageState extends State<HomePage> {
                               mainAxisSpacing: 20.0,  
                               childAspectRatio: 1/1.4, 
                             ),
-                            itemCount: recomFoods.length,
+                            itemCount: currentFoodList.length,
                             itemBuilder: (context, index) {
-                              String key = recomFoods.keys.elementAt(index);
-                              List<String>? values = recomFoods[key];
+                              String key = currentFoodList.keys.elementAt(index);
+                              List<String>? values = currentFoodList[key];
                               return Container(
                                 decoration: BoxDecoration(
                                    color: context.theme.highlightColor,
