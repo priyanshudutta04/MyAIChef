@@ -58,6 +58,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/Food_Images/
     - assets/icons/
     - assets/others/
 
