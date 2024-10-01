@@ -10,4 +10,5 @@ class Myroutes{
   static String recipeDetailsRoute = "/recipeDetails";
   static String blogsRoute = "/blogs";
   static String profileRoute = "/profile";
+  static String findRecipeRoute = "/findRecipe";
 }

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:my_ai_chef/pages/blogs.dart';
 import 'package:my_ai_chef/pages/check_availability.dart';
 import 'package:my_ai_chef/pages/choose_charger.dart';
+import 'package:my_ai_chef/pages/find_recipe.dart';
 import 'package:my_ai_chef/pages/get_started.dart';
 import 'package:my_ai_chef/pages/home.dart';
 import 'package:my_ai_chef/pages/payment.dart';
@@ -78,6 +79,7 @@ class _MyAppState extends State<MyApp> {
         Myroutes.recipesRoute: (context) => RecipesPage(),
         Myroutes.profileRoute: (context) => ProfilePage(),
         Myroutes.recipeDetailsRoute: (context) => RecipeDetails(),
+        Myroutes.findRecipeRoute: (context) => FindRecipe(),
       },
     );   
   }

@@ -197,6 +197,9 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     SizedBox(height: 15,),
                                     GestureDetector(
+                                      onTap: (){
+                                        Navigator.pushNamed(context, '/findRecipe');
+                                      },
                                       child: Container(
                                         width: 100,
                                         height:30,
