@@ -21,7 +21,7 @@ class _RecipeDetailsState extends State<RecipeDetails> {
     {
       'imageUrl': 'assets/images/recipe-item1.jpeg',
       'title': 'Basmati Rice',
-      'description': '300 g',
+      'description': '600 g',
     },
     {
       'imageUrl': 'assets/images/recipe-item2.jpeg',
@@ -225,7 +225,8 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                           ),
                         );
                       },
-                    ),         
+                    ),   
+                    SizedBox(height: 20,)      
                   ],
                 ),
               ),

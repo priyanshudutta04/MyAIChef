@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_ai_chef/utils/bottom_pages_list.dart';
+import 'package:my_ai_chef/utils/food_list.dart';
 import 'package:my_ai_chef/widgets/bottom_nav.dart';
 import 'package:my_ai_chef/widgets/sparkling_animation.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -18,56 +19,13 @@ class _HomePageState extends State<HomePage> {
 
   int selectedChipIndex = 0;
   
-  final Map<String, String> filterChips = {
-    "Recommended": "assets/images/recom.png",
-    "Breakfast": "assets/images/breakfast.png",
-    "Lunch": "assets/images/lunch.png",
-    "Appetizer": "assets/images/apetizer.png",
-    "Dinner": "assets/images/dinner.png",
-  };
-
-  final Map<String, List<String>> recomFoods = {
-    "Chicken Biriyani": ["229kcal", "assets/images/biriyani.png"],
-    "Fried Rice": ["229kcal", "assets/images/biriyani.png"],
-    "Tikka Masala": ["229kcal", "assets/images/biriyani.png"],
-    "Noodles": ["229kcal", "assets/images/biriyani.png"],
-  };
-
-  final Map<String, List<String>> breakfastFoods = {
-    "Poha": ["229kcal", "assets/images/biriyani.png"],
-    "Fried Rice": ["229kcal", "assets/images/biriyani.png"],
-    "Tikka Masala": ["229kcal", "assets/images/biriyani.png"],
-    "Noodles": ["229kcal", "assets/images/biriyani.png"],
-  };
-
-  final Map<String, List<String>> lunchFoods = {
-    "Dosa": ["229kcal", "assets/images/biriyani.png"],
-    "Fried Rice": ["229kcal", "assets/images/biriyani.png"],
-    "Tikka Masala": ["229kcal", "assets/images/biriyani.png"],
-    "Noodles": ["229kcal", "assets/images/biriyani.png"],
-  };
-
-  final Map<String, List<String>> appetizerFoods = {
-    "Samosa": ["229kcal", "assets/images/biriyani.png"],
-    "Fried Rice": ["229kcal", "assets/images/biriyani.png"],
-    "Tikka Masala": ["229kcal", "assets/images/biriyani.png"],
-    "Noodles": ["229kcal", "assets/images/biriyani.png"],
-  };
-
-  final Map<String, List<String>> dinnerFoods = {
-    "Butter Chiken": ["229kcal", "assets/images/biriyani.png"],
-    "Fried Rice": ["229kcal", "assets/images/biriyani.png"],
-    "Tikka Masala": ["229kcal", "assets/images/biriyani.png"],
-    "Noodles": ["229kcal", "assets/images/biriyani.png"],
-  };
-
   late Map<String, List<String>> currentFoodList;
 
   @override
   void initState() {
     super.initState();
 
-    currentFoodList = lunchFoods;
+    currentFoodList = recomFoods;
   }
 
   void updateFoodList(int index) {
