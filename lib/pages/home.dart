@@ -288,7 +288,7 @@ class _HomePageState extends State<HomePage> {
                               crossAxisCount: 2, 
                               crossAxisSpacing: 15.0, 
                               mainAxisSpacing: 20.0,  
-                              childAspectRatio: 1/1.4, 
+                              childAspectRatio: 1/1.43, 
                             ),
                             itemCount: currentFoodList.length,
                             itemBuilder: (context, index) {
@@ -316,7 +316,7 @@ class _HomePageState extends State<HomePage> {
                                       padding: const EdgeInsets.symmetric(horizontal: 10),
                                       child: Text(
                                           key,
-                                          style: TextStyle( fontSize: 16),
+                                          style: TextStyle( fontSize: 16,fontFamily: 'FontMain'  ),
                                         ),
                                     ),                              
                                   Padding(
@@ -349,7 +349,7 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                         ),
                                         Text(
-                                          "15 mins",
+                                          values![2],
                                           style: TextStyle( fontSize: 14,color: context.theme.splashColor),
                                         ),
                                       ],

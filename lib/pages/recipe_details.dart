@@ -232,8 +232,8 @@ class _RecipeDetailsState extends State<RecipeDetails> {
               ),
             ),
              Positioned(
-              left: 70,
-              right: 70,
+              left: 90,
+              right: 90,
               bottom: 20, 
               child: Container(
                 decoration: BoxDecoration(

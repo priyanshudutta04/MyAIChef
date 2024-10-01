@@ -43,6 +43,7 @@ class _RecipesPageState extends State<RecipesPage> {
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: Column(
               children: [
+                SizedBox(height: 20,),
                 TextField(
                   controller: _searchController,
                   decoration: InputDecoration(
@@ -74,6 +75,11 @@ class _RecipesPageState extends State<RecipesPage> {
                   ),
                 ),
                 SizedBox(height: 20,),
+                // Align(
+                //   alignment: Alignment.topLeft,
+                //   child: Text("View All Recipes",
+                //   style: TextStyle(fontWeight: FontWeight.w400,fontSize: 24),)
+                // ),
 
 
                 Expanded(
@@ -86,55 +92,84 @@ class _RecipesPageState extends State<RecipesPage> {
                   
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          
+                        children: [           
                           ListView.builder(
                             shrinkWrap: true, 
                             physics: NeverScrollableScrollPhysics(), 
                             itemCount: filteredFoodMap.length,
                             itemBuilder: (context, foodIndex) {
                               final foodName = filteredFoodMap[foodIndex].key;
-                              final foodDetails = filteredFoodMap[foodIndex].value;
-                  
-                              return Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 5),
-                                child: Container(
-                                  height: 140,
-                                  decoration: BoxDecoration(
-                                    color: context.theme.highlightColor,
-                                    borderRadius: BorderRadius.circular(10)
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 10),
-                                    child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Image.asset(
-                                          foodDetails[1],
-                                          width: 130,
-                                          height: 130,
-                                          fit: BoxFit.cover,
-                                        ),
-                                        SizedBox(width: 16),
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              foodName,
-                                              style: TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                              final foodDetails = filteredFoodMap[foodIndex].value;             
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/recipeDetails');
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 5),
+                                  child: Container(
+                                    height: 140,
+                                    decoration: BoxDecoration(
+                                      color: context.theme.highlightColor,
+                                      borderRadius: BorderRadius.circular(10)
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 10),
+                                      child:Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Image.asset(
+                                            foodDetails[1],  
+                                            width: 130,
+                                            height: 130,
+                                            fit: BoxFit.cover,
+                                          ),
+                                          SizedBox(width: 16),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                SizedBox(height: 15,),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      foodDetails[0],  
+                                                      style: TextStyle(fontSize: 16, color: context.theme.cardColor),
+                                                    ),
+                                                    SizedBox(width: 20),
+                                                    Text(
+                                                      foodDetails[2],  
+                                                      style: TextStyle(fontSize: 16, color: context.theme.cardColor),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(height: 4),
+                                                Text(
+                                                  foodName, 
+                                                  style: TextStyle(
+                                                    fontSize: 18,
+                                                    fontFamily: 'FontMain'                                                
+                                                  ),
+                                                ),
+                                                SizedBox(height: 2),
+                                                Expanded(
+                                                  child: Text(
+                                                    foodDetails[3],  
+                                                    overflow: TextOverflow.ellipsis,  
+                                                    softWrap: true, 
+                                                    maxLines: 2, 
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: context.theme.splashColor
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                            Text(
-                                              foodDetails[0],
-                                              style: TextStyle(fontSize: 16),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),

@@ -13,7 +13,7 @@ class SparklingAnimation extends StatefulWidget {
 
 class _SparklingAnimationState extends State<SparklingAnimation> with SingleTickerProviderStateMixin {
   final Random random = Random();
-  final List<List<Offset>> _sparkleTrails = []; // Stores a list of previous positions for each star
+  final List<List<Offset>> _sparkleTrails = []; 
   final List<double> _sparkleOpacities = [];
   final List<Offset> _velocity = [];
   late AnimationController _controller;
@@ -26,7 +26,7 @@ class _SparklingAnimationState extends State<SparklingAnimation> with SingleTick
     super.initState();
 
     // Initialize stars with trails
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 15; i++) {
       // Initialize each star's trail with its starting position
       List<Offset> initialTrail = List.generate(
         trailLength,
@@ -55,10 +55,10 @@ class _SparklingAnimationState extends State<SparklingAnimation> with SingleTick
         Offset newPosition = trail.last + _velocity[i];
 
         // Ensure the new position stays within bounds
-        if (newPosition.dx < 0 || newPosition.dx > 200) {
+        if (newPosition.dx < 0 || newPosition.dx > 180) {
           _velocity[i] = Offset(-_velocity[i].dx, _velocity[i].dy);
         }
-        if (newPosition.dy < 0 || newPosition.dy > 200) {
+        if (newPosition.dy < 0 || newPosition.dy > 250) {
           _velocity[i] = Offset(_velocity[i].dx, -_velocity[i].dy);
         }
 
