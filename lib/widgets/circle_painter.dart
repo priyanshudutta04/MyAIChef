@@ -1,29 +1,45 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
-class SemicirclePainter extends CustomPainter {
-  final Color color;
-  final double height;
-
-  SemicirclePainter({required this.color, required this.height});
-
+class ScatteredBallsPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()..color = color;
+    final paint = Paint();
 
-    // Create a path for the semicircle
-    final Path path = Path();
-    path.lineTo(size.width, 0);
-    path.lineTo(size.width, height);
-    path.quadraticBezierTo(size.width / 2, height + 50, 0, height);
-    path.lineTo(0, 0);
-    path.close();
+    final circles = [
+      Circle(Offset(100, 100), 25, Colors.amber),
+      Circle(Offset(100, 400), 28, Colors.amber),
+      Circle(Offset(350, 450), 10, Colors.amber),
+      Circle(Offset(150, 550), 20, Colors.amber),
 
-    // Draw the semicircle
-    canvas.drawPath(path, paint);
+      Circle(Offset(350, 80), 27, Colors.amber),
+      Circle(Offset(120, 200), 12, Colors.amber),
+      Circle(Offset(290, 250), 22, Colors.amber),
+      Circle(Offset(50, 500), 15, Colors.amber),
+      Circle(Offset(280, 350), 29, Colors.amber),
+
+      Circle(Offset(300, 500), 14, Colors.amber),
+      Circle(Offset(100, 620), 20, Colors.amber),
+    ];
+
+    for (final circle in circles) {
+      paint.color = circle.color;
+      canvas.drawCircle(circle.position, circle.radius, paint);
+    }
   }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
+    return false; 
   }
+}
+
+
+class Circle {
+  final Offset position;
+  final double radius;
+  final Color color;
+
+  Circle(this.position, this.radius, this.color);
 }

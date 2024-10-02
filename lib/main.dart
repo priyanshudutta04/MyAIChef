@@ -3,17 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_ai_chef/pages/blogs.dart';
-import 'package:my_ai_chef/pages/check_availability.dart';
-import 'package:my_ai_chef/pages/choose_charger.dart';
 import 'package:my_ai_chef/pages/find_recipe.dart';
 import 'package:my_ai_chef/pages/get_started.dart';
 import 'package:my_ai_chef/pages/home.dart';
-import 'package:my_ai_chef/pages/payment.dart';
-import 'package:my_ai_chef/pages/payment_done.dart';
 import 'package:my_ai_chef/pages/profile.dart';
 import 'package:my_ai_chef/pages/recipe_details.dart';
 import 'package:my_ai_chef/pages/recipes.dart';
-import 'package:my_ai_chef/pages/station_details.dart';
 import 'package:my_ai_chef/utils/routes.dart';
 import 'package:my_ai_chef/utils/themes.dart';
 import 'package:provider/provider.dart';
@@ -68,13 +63,8 @@ class _MyAppState extends State<MyApp> {
       
       routes: {                                       //creating routes for different pages in app
         "/": (context) => GetStarted(),                //main root 
-        Myroutes.chargerRoute: (context) => ChooseCharger(),
         Myroutes.getStartedRoute: (context) => GetStarted(),
         Myroutes.homeRoute: (context) => HomePage(),
-        Myroutes.stationDetailsRoute: (context) => StationDetails(),
-        Myroutes.availabilityRoute: (context) => CheckAvailability(),
-        Myroutes.paymentRoute: (context) => PaymentPage(),
-        Myroutes.paymentDoneRoute: (context) => PaymentDone(),
         Myroutes.blogsRoute: (context) => BlogsPage(),
         Myroutes.recipesRoute: (context) => RecipesPage(),
         Myroutes.profileRoute: (context) => ProfilePage(),
