@@ -55,6 +55,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: context.canvasColor,   
       appBar: AppBar(
+         automaticallyImplyLeading: false,
         toolbarHeight: 80,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween, 

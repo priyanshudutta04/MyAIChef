@@ -67,7 +67,7 @@ class _MyAppState extends State<MyApp> {
       initialRoute: "/",                              //this route will open first
       
       routes: {                                       //creating routes for different pages in app
-        "/": (context) => HomePage(),                //main root 
+        "/": (context) => GetStarted(),                //main root 
         Myroutes.chargerRoute: (context) => ChooseCharger(),
         Myroutes.getStartedRoute: (context) => GetStarted(),
         Myroutes.homeRoute: (context) => HomePage(),

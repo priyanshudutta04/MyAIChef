@@ -28,7 +28,7 @@ class GetStarted extends StatelessWidget {
         ),
         child: FloatingActionButton(
           onPressed: () {
-            Navigator.pushNamed(context, "/charger");
+            Navigator.pushNamed(context, "/home");
           },
           child: Icon(CupertinoIcons.arrow_right,color: context.theme.focusColor,),
           backgroundColor: context.cardColor,
@@ -41,7 +41,7 @@ class GetStarted extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/get_started_bg.jpeg"),
+            image: AssetImage("assets/images/woman_chef.png"),
             fit: BoxFit.cover
           ),
         ),
@@ -49,6 +49,7 @@ class GetStarted extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Spacer(),
               Padding(
                 padding: const EdgeInsets.only(left: 20,top: 50,bottom: 20),
                 child: Container(
@@ -56,8 +57,8 @@ class GetStarted extends StatelessWidget {
                     color: Colors.transparent
                   ),
                   child: Text(
-                    "Power EV",
-                    style: TextStyle(fontSize: 45, color: Colors.white,fontFamily: 'Anta',letterSpacing: 3),
+                    "Find the perfect recipe everyday",
+                    style: TextStyle(fontSize: 32, color: Colors.black,fontFamily: 'FontMain',letterSpacing: 3),
                   ),
                 ),      
               ),
@@ -103,7 +104,8 @@ class GetStarted extends StatelessWidget {
                 
                 
                 ],),
-              )
+              ),
+              SizedBox(height: 30,)
               
 
             ],
