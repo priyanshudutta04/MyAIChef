@@ -1,5 +1,8 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:my_ai_chef/utils/food_list.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -12,7 +15,10 @@ class FindRecipe extends StatefulWidget {
 
 class _FindRecipeState extends State<FindRecipe> {
   int count=0;
-  final List<Map<String, String>> _messages = [];
+  File? _selectedImage;
+  bool imgup=false;
+  
+  final List<Map<String, dynamic>> _messages = [];
   final TextEditingController _controller = TextEditingController();
   final List<String> _dietarypref = [
     'Non-Vegetarian',
@@ -28,7 +34,8 @@ class _FindRecipeState extends State<FindRecipe> {
 
   final List<String> _predefinedBotMessages = [
     'Hi, I am your AiChef, I am here to help you find the perfect recipe for you based on your available ingredients. But first, I need to know what are your dietary preferences?',
-    'Great!, now I need to know if you have any of the following food allergies?'
+    'Great!, now I need to know if you have any of the following food allergies?',
+    'Ok, Now please upload image of the ingridients that are available with you right now',
     'Analyzing your Ingridients...',
   ];
 
@@ -38,14 +45,14 @@ class _FindRecipeState extends State<FindRecipe> {
     Timer(const Duration(seconds: 0), () {
       _streamBotMessage(message);
     });
+
   }
 
   void _sendMessage(String message) {
     setState(() {
       _messages.add({'sender': 'user', 'message': message}); 
     });
-
-    
+   
     _sendInitialBotMessage(_predefinedBotMessages[count++]);
   }
 
@@ -54,7 +61,7 @@ class _FindRecipeState extends State<FindRecipe> {
     String accumulatedMessage = '';
     int index = 0;
 
-    Timer.periodic(const Duration(milliseconds: 50), (timer) {
+    Timer.periodic(const Duration(milliseconds: 30), (timer) {
       if (index < words.length) {
         setState(() {
           accumulatedMessage += (index == 0 ? '' : ' ') + words[index];
@@ -73,6 +80,28 @@ class _FindRecipeState extends State<FindRecipe> {
       }
     });
   }
+
+  Future<void> _pickImage() async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      setState(() {
+        _selectedImage = File(image.path);
+        _messages.add({
+          'sender': 'user',
+          'type': 'image',
+          'image': _selectedImage,  
+        });
+      });
+    }
+    imgup=true;
+  }
+
+  void _sendGemini(){
+
+  }
+
 
   @override
   void initState() {
@@ -97,6 +126,7 @@ class _FindRecipeState extends State<FindRecipe> {
                 itemCount: _messages.length,
                 itemBuilder: (context, index) {
                   final isUser = _messages[index]['sender'] == 'user';
+                  final isImage = _messages[index]['type'] == 'image';
                   final name = isUser ? 'You' : 'AiChef';
                   final time =
                       DateTime.now().toLocal().toString().substring(11, 16);
@@ -109,8 +139,30 @@ class _FindRecipeState extends State<FindRecipe> {
                       children: [
                         Align(
                           alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
-                          child: ConstrainedBox(
-                            constraints: const BoxConstraints(
+                          child:isImage
+                          ? Container(
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color:context.theme.cardColor,
+                              borderRadius:const BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                                bottomLeft: Radius.circular(20),
+                                bottomRight: Radius.circular(0),
+                              )
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.file(
+                                  _messages[index]['image'], 
+                                  width: 150,  
+                                  height: 150,
+                                  fit: BoxFit.cover,
+                                ),
+                            ),
+                          )
+                          :  ConstrainedBox(
+                              constraints: const BoxConstraints(
                               maxWidth: 250,
                             ),
                             child: Container(
@@ -182,14 +234,14 @@ class _FindRecipeState extends State<FindRecipe> {
                   return GestureDetector(
                     onTap: () => _sendMessage(message),
                     child: Container(
-                      padding: const EdgeInsets.all(12),
+                      padding: const EdgeInsets.symmetric(vertical:10,horizontal:15),
                       decoration: BoxDecoration(
                         color: context.theme.cardColor,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
                         message,
-                        style: const TextStyle(color: Colors.white),
+                        style:  TextStyle(color: context.theme.highlightColor),
                       ),
                     ),
                   );
@@ -206,21 +258,47 @@ class _FindRecipeState extends State<FindRecipe> {
                   return GestureDetector(
                     onTap: () => _sendMessage(message),
                     child: Container(
-                      padding: const EdgeInsets.all(12),
+                      padding: const EdgeInsets.symmetric(vertical:10,horizontal:35),
                       decoration: BoxDecoration(
                         color: context.theme.cardColor,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
                         message,
-                        style: const TextStyle(color: Colors.white),
+                        style:  TextStyle(color: context.theme.highlightColor),
                       ),
                     ),
                   );
                 }).toList(),
               ),
             )
-            :Container(),
+            :GestureDetector(
+              onTap: (){
+               _pickImage();
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal:40 ),
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical:10,horizontal:35),
+                  decoration: BoxDecoration(
+                    color: context.theme.cardColor,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Upload Image",
+                        style:  TextStyle(color:context.theme.highlightColor,fontSize: 22),
+                      ),
+                      SizedBox(width: 10,),
+                      Icon(FontAwesomeIcons.camera,color: context.theme.highlightColor,size: 18,)
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
