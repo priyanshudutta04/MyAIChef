@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            Row(
+            const Row(
               children: [
                 Icon(Icons.location_on, color: Colors.black,size: 16,),
                 Text(
@@ -99,8 +99,8 @@ class _HomePageState extends State<HomePage> {
                 color: context.theme.highlightColor,
                 borderRadius: BorderRadius.circular(10)
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Icon(CupertinoIcons.bell, color: Colors.black,size: 22,),
               ), 
             ),
@@ -117,7 +117,7 @@ class _HomePageState extends State<HomePage> {
 
                 TextField(
                   decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.search),
+                    prefixIcon: const Icon(Icons.search),
                     suffixIcon: Padding(
                       padding: const EdgeInsets.only(right: 10),
                       child: CircleAvatar(
@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     hintText: 'Search by food name',
-                    hintStyle: TextStyle(fontSize: 14),
+                    hintStyle: const TextStyle(fontSize: 14),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                       borderSide: BorderSide.none
@@ -142,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
 
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
 
                
                  Container(
@@ -196,7 +196,7 @@ class _HomePageState extends State<HomePage> {
                                         fontSize: 22
                                       ),
                                     ),
-                                    SizedBox(height: 15,),
+                                    const SizedBox(height: 15,),
                                     GestureDetector(
                                       onTap: (){
                                         Navigator.pushNamed(context, '/findRecipe');
@@ -217,7 +217,7 @@ class _HomePageState extends State<HomePage> {
                                   ],
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                                         
                               Image.asset(
                               width: 120,
@@ -225,7 +225,7 @@ class _HomePageState extends State<HomePage> {
                               "assets/images/woman_chef.png",
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(width: 10,)
+                            const SizedBox(width: 10,)
                               
                             ],
                           ),
@@ -233,7 +233,7 @@ class _HomePageState extends State<HomePage> {
                       ),     
                   ),
 
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
 
                   Center(
                     child: SingleChildScrollView(
@@ -241,7 +241,7 @@ class _HomePageState extends State<HomePage> {
                       child: Row(
                         children: List<Widget>.generate(filterChips.length, (int index) {
                           return Padding(
-                            padding: EdgeInsets.symmetric(horizontal:10),
+                            padding: const EdgeInsets.symmetric(horizontal:10),
                             child: FilterChip(
                               backgroundColor: context.theme.highlightColor,
                               showCheckmark: false,
@@ -288,7 +288,7 @@ class _HomePageState extends State<HomePage> {
                        padding: const EdgeInsets.only(bottom: 5),                  
                          child: GridView.builder( 
                           shrinkWrap: true,            
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2, 
                               crossAxisSpacing: 15.0, 
                               mainAxisSpacing: 20.0,  
@@ -320,17 +320,17 @@ class _HomePageState extends State<HomePage> {
                                       padding: const EdgeInsets.symmetric(horizontal: 10),
                                       child: Text(
                                           key,
-                                          style: TextStyle( fontSize: 16,fontFamily: 'FontMain'  ),
+                                          style: const TextStyle( fontSize: 16,fontFamily: 'FontMain'  ),
                                         ),
                                     ),                              
                                   Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 10),
                                     child: Text(
-                                       values![0],
+                                       values[0],
                                         style: TextStyle( fontSize: 14,color: context.theme.splashColor),
                                     ),
                                   ),
-                                  SizedBox(height: 10,),
+                                  const SizedBox(height: 10,),
                                   
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -340,7 +340,7 @@ class _HomePageState extends State<HomePage> {
                                             Navigator.pushNamed(context, '/recipeDetails');
                                           },
                                           child: Container(
-                                            padding: EdgeInsets.all(2),
+                                            padding: const EdgeInsets.all(2),
                                             width: 85,
                                             height:25,
                                             decoration: BoxDecoration(
@@ -353,7 +353,7 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                         ),
                                         Text(
-                                          values![2],
+                                          values[2],
                                           style: TextStyle( fontSize: 14,color: context.theme.splashColor),
                                         ),
                                       ],

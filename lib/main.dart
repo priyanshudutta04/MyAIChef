@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_ai_chef/pages/blogs.dart';
@@ -13,11 +11,25 @@ import 'package:my_ai_chef/utils/routes.dart';
 import 'package:my_ai_chef/utils/themes.dart';
 import 'package:provider/provider.dart';
 
-void main() async{
-  
-  runApp( MyApp());
+mixin Previewer {
+  void preview() {
+    print('Previewing...');
+  }
 }
 
+class DevicePreviewProvider extends StatelessWidget with Previewer {
+  const DevicePreviewProvider({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    preview(); // Using the mixin method
+    return Container();
+  }
+}
+
+void main() async{
+  runApp(MyApp());
+}
 
 // ignore: must_be_immutable
 class MyApp extends StatefulWidget {
@@ -36,7 +48,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       systemNavigationBarColor: Color.fromRGBO(244, 244, 244, 1),
       statusBarColor: Color.fromRGBO(244, 244, 244, 1),
       systemNavigationBarIconBrightness: Brightness.dark,
@@ -62,14 +74,14 @@ class _MyAppState extends State<MyApp> {
       initialRoute: "/",                              //this route will open first
       
       routes: {                                       //creating routes for different pages in app
-        "/": (context) => GetStarted(),                //main root 
-        Myroutes.getStartedRoute: (context) => GetStarted(),
-        Myroutes.homeRoute: (context) => HomePage(),
-        Myroutes.blogsRoute: (context) => BlogsPage(),
-        Myroutes.recipesRoute: (context) => RecipesPage(),
-        Myroutes.profileRoute: (context) => ProfilePage(),
-        Myroutes.recipeDetailsRoute: (context) => RecipeDetails(),
-        Myroutes.findRecipeRoute: (context) => FindRecipe(),
+        "/": (context) => const GetStarted(),                //main root 
+        Myroutes.getStartedRoute: (context) => const GetStarted(),
+        Myroutes.homeRoute: (context) => const HomePage(),
+        Myroutes.blogsRoute: (context) => const BlogsPage(),
+        Myroutes.recipesRoute: (context) => const RecipesPage(),
+        Myroutes.profileRoute: (context) => const ProfilePage(),
+        Myroutes.recipeDetailsRoute: (context) => const RecipeDetails(),
+        Myroutes.findRecipeRoute: (context) => const FindRecipe(),
       },
     );   
   }
